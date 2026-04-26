@@ -22,7 +22,7 @@ function lbKey(size) {
  *   lastTimeMs?: number,
  * }}
  */
-export function loadGameState() {
+function loadGameState() {
   try {
     const raw = localStorage.getItem(GAME_KEY);
     if (!raw) return null;
@@ -57,7 +57,7 @@ export function loadGameState() {
  * @param {boolean} s.completed
  * @param {number} [s.lastTimeMs]
  */
-export function saveGameState(s) {
+function saveGameState(s) {
   try {
     localStorage.setItem(GAME_KEY, JSON.stringify(s));
   } catch {
@@ -65,7 +65,7 @@ export function saveGameState(s) {
   }
 }
 
-export function clearGameState() {
+function clearGameState() {
   try {
     localStorage.removeItem(GAME_KEY);
   } catch {
@@ -77,7 +77,7 @@ export function clearGameState() {
  * @param {number} size
  * @returns {LeaderEntry[]}
  */
-export function getLeaderboard(size) {
+function getLeaderboard(size) {
   try {
     const raw = localStorage.getItem(lbKey(size));
     if (!raw) return [];
@@ -103,7 +103,7 @@ export function getLeaderboard(size) {
  * @param {{ name: string, timeMs: number }} entry
  * @returns {LeaderEntry[]}
  */
-export function addLeaderboardEntry(size, entry) {
+function addLeaderboardEntry(size, entry) {
   const name = entry.name.trim().slice(0, 32) || "Anonymous";
   const timeMs = Math.max(0, entry.timeMs | 0);
   const at = Date.now();

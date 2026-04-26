@@ -38,7 +38,7 @@ function collidesAt(x, z, halfW, walls) {
  * @param {number} dx
  * @param {number} dz
  */
-export function tryMove2D(p, dx, dz) {
+function tryMove2D(p, dx, dz) {
   const hw = p.halfW;
   const { worldMinX, worldMaxX, worldMinZ, worldMaxZ, walls } = p;
   const clampW = (x, z) => ({
@@ -64,6 +64,6 @@ export function tryMove2D(p, dx, dz) {
 }
 
 /** Yaw: rotation around Y; forward in xz = (Math.sin(yaw), -Math.cos(yaw)) (camera at default looks -Z) */
-export function forwardFromYaw(yaw) {
+function forwardFromYaw(yaw) {
   return { x: Math.sin(yaw), z: -Math.cos(yaw) };
 }

@@ -1,4 +1,4 @@
-export const ALLOWED_SIZES = [5, 10, 15, 20];
+const ALLOWED_SIZES = [5, 10, 15, 20];
 
 const DIR_N = 0;
 const DIR_E = 1;
@@ -16,7 +16,7 @@ const DJ = [-1, 0, 1, 0];
  * @param {number} size
  * @returns {{ start: [number, number], exit: [number, number] }}
  */
-export function getStartExit(size) {
+function getStartExit(size) {
   return {
     start: [0, 0],
     exit: [size - 1, size - 1],
@@ -29,7 +29,7 @@ export function getStartExit(size) {
  * @param {number} [seed] - for reproducibility
  * @returns {{ cells: CellWalls[][], w: number, h: number }}
  */
-export function generateMaze(size, seed = null) {
+function generateMaze(size, seed = null) {
   const w = size;
   const h = size;
   const rng = seed != null ? mulberry32(seed) : () => Math.random();
@@ -94,7 +94,7 @@ function mulberry32(a) {
  * @param {[number, number]} from
  * @param {[number, number]} to
  */
-export function hasPath(cells, from, to) {
+function hasPath(cells, from, to) {
   const w = cells[0].length;
   const h = cells.length;
   const q = [from];

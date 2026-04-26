@@ -1,25 +1,4 @@
-import * as THREE from "three";
-import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import {
-  generateMaze,
-  hasPath,
-  getStartExit,
-  ALLOWED_SIZES,
-} from "./maze.js";
-import { tryMove2D } from "./player.js";
-import { createMinimap } from "./minimap.js";
-import {
-  createWoodTexture,
-  createWoodMaterial,
-  createFloorTexture,
-  createFloorMaterial,
-} from "./materials.js";
-import {
-  loadGameState,
-  saveGameState,
-  getLeaderboard,
-  addLeaderboardEntry,
-} from "./storage.js";
+/* global THREE — from three.min.js */
 
 const cellW = 1;
 const wallT = 0.1 * cellW;
@@ -87,7 +66,7 @@ if (
 let playerName = "";
 let gameSize = 20;
 let mazeSeed = 0;
-/** @type {import("./maze.js").CellWalls[][] | null} */
+/** @type {{ n: boolean, e: boolean, s: boolean, w: boolean }[][] | null} */
 let cells = null;
 let colliders = /** @type {{ minX: number, maxX: number, minZ: number, maxZ: number }[]} */ ([]);
 let worldMax = 20;
@@ -260,34 +239,15 @@ function buildWallFloor() {
   for (let i = 0; i <= sz; i++) addVerticalWall(i);
   for (let j = 0; j <= sz; j++) addHorizontalWall(j);
 
-  let mergedWalls = null;
-  if (geoms.length > 0) {
-    try {
-      mergedWalls = mergeGeometries(geoms, false);
-    } catch (e) {
-      console.warn("mergeGeometries failed, using group fallback", e);
-    }
+  const grp = new THREE.Group();
+  for (const g of geoms) {
+    const m = new THREE.Mesh(g, wallMat);
+    m.castShadow = true;
+    m.receiveShadow = true;
+    grp.add(m);
   }
-  const mergedOk =
-    mergedWalls &&
-    mergedWalls.getAttribute("position") &&
-    mergedWalls.getAttribute("position").count > 0;
-  if (mergedOk) {
-    wallMesh = new THREE.Mesh(mergedWalls, wallMat);
-    wallMesh.castShadow = true;
-    wallMesh.receiveShadow = true;
-    scene.add(wallMesh);
-  } else {
-    const grp = new THREE.Group();
-    for (const g of geoms) {
-      const m = new THREE.Mesh(g, wallMat);
-      m.castShadow = true;
-      m.receiveShadow = true;
-      grp.add(m);
-    }
-    wallMesh = grp;
-    scene.add(grp);
-  }
+  wallMesh = grp;
+  scene.add(grp);
 
   const floorG = new THREE.PlaneGeometry(worldMax, worldMax);
   floorM = new THREE.Mesh(floorG, floorMat);
@@ -502,7 +462,7 @@ function beginGame(opts = {}) {
   } catch (err) {
     console.error(err);
     const msg = err instanceof Error ? err.message : String(err);
-    alert(`Could not start the game: ${msg}\n\nIf you opened this file directly (file://), use a local server instead (see README).`);
+    alert(`Could not start the game: ${msg}`);
   }
 }
 

@@ -14,17 +14,6 @@ body {
 .hidden {
   display: none !important;
 }
-.file-warn {
-  margin: 0;
-  padding: 10px 14px;
-  background: #5a2020;
-  color: #ffd0c8;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  border-bottom: 2px solid #c04040;
-  z-index: 400;
-  position: relative;
-}
 .modal {
   position: fixed;
   inset: 0;

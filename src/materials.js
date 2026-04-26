@@ -1,11 +1,9 @@
-import * as THREE from "three";
-
 /**
  * Procedural wood-like color texture (no external images).
  * @param {object} [opts]
  * @param {number} [opts.size] - canvas size
  */
-export function createWoodTexture({ size = 256 } = {}) {
+function createWoodTexture({ size = 256 } = {}) {
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
@@ -58,7 +56,7 @@ export function createWoodTexture({ size = 256 } = {}) {
  * @param {THREE.Texture | null} woodTexture
  * @param {{ roughness?: number, metalness?: number }} [opts]
  */
-export function createWoodMaterial(woodTexture, opts = {}) {
+function createWoodMaterial(woodTexture, opts = {}) {
   return new THREE.MeshStandardMaterial({
     map: woodTexture,
     color: 0xffffff,
@@ -69,7 +67,7 @@ export function createWoodMaterial(woodTexture, opts = {}) {
 }
 
 /** Floor: slightly different tone, still wood-ish */
-export function createFloorTexture({ size = 128 } = {}) {
+function createFloorTexture({ size = 128 } = {}) {
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
@@ -95,7 +93,7 @@ export function createFloorTexture({ size = 128 } = {}) {
   return tex;
 }
 
-export function createFloorMaterial(floorTexture) {
+function createFloorMaterial(floorTexture) {
   return new THREE.MeshStandardMaterial({
     map: floorTexture,
     color: 0xccccbb,

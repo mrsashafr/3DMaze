@@ -4,13 +4,7 @@ Web-based first-person 3D maze, built with Three.js. At launch you enter your na
 
 ## Run locally
 
-Browsers block ES modules from `file://`. Serve the project folder:
-
-```bash
-python -m http.server 8080
-```
-
-Open `http://localhost:8080/`.
+Open `index.html` in your browser (double-click the file or drag it into a tab). The game loads Three.js from a CDN and runs entirely in the browser.
 
 ## Controls
 

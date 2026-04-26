@@ -5,29 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Maze Game</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-      }
-    </script>
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   </head>
   <body>
-    <p id="file-protocol-warning" class="file-warn hidden" role="alert"></p>
-    <script>
-      (function () {
-        if (location.protocol === "file:") {
-          var el = document.getElementById("file-protocol-warning");
-          if (el) {
-            el.classList.remove("hidden");
-            el.textContent =
-              "This page must be served over HTTP (not opened as a file). Run: python -m http.server in the project folder, then open http://localhost:8000/ — otherwise JavaScript will not load and Start will do nothing.";
-          }
-        }
-      })();
-    </script>
     <div id="start-modal" class="modal" role="dialog" aria-labelledby="start-title">
       <div class="modal-card">
         <h1 id="start-title">3D Maze</h1>
@@ -94,6 +74,11 @@
       </div>
     </div>
 
-    <script type="module" src="./src/main.js"></script>
+    <script src="./src/maze.js"></script>
+    <script src="./src/player.js"></script>
+    <script src="./src/minimap.js"></script>
+    <script src="./src/materials.js"></script>
+    <script src="./src/storage.js"></script>
+    <script src="./src/main.js"></script>
   </body>
 </html>

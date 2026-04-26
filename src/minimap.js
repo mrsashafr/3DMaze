@@ -1,5 +1,3 @@
-import { forwardFromYaw } from "./player.js";
-
 const IDLE_MS = 10_000;
 
 /**
@@ -11,7 +9,7 @@ const IDLE_MS = 10_000;
  * @param {[number, number]} opts.start
  * @param {[number, number]} opts.exit
  */
-export function createMinimap(opts) {
+function createMinimap(opts) {
   const { canvas, container, mapSize = 200 } = opts;
 
   let sizeCells = opts.sizeCells;
@@ -25,7 +23,7 @@ export function createMinimap(opts) {
 
   let visible = true;
   let lastInputTime = 0;
-  let mazeCells = /** @type {import("./maze.js").CellWalls[][]} */ (null);
+  let mazeCells = /** @type {{ n: boolean, e: boolean, s: boolean, w: boolean }[][] | null} */ (null);
   const pad = 8;
   let cellPx = (mapSize - pad * 2) / sizeCells;
 
@@ -80,7 +78,7 @@ export function createMinimap(opts) {
   }
 
   /**
-   * @param {import("./maze.js").CellWalls[][]} cells
+   * @param {{ n: boolean, e: boolean, s: boolean, w: boolean }[][]} cells
    */
   function setMaze(cells) {
     mazeCells = cells;
