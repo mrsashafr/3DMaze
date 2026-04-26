@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Maze Game</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <p id="file-protocol-warning" class="file-warn hidden" role="alert"></p>
+    <script>
+      (function () {
+        if (location.protocol === "file:") {
+          var el = document.getElementById("file-protocol-warning");
+          if (el) {
+            el.classList.remove("hidden");
+            el.textContent =
+              "This page must be served over HTTP (not opened as a file). Run: python -m http.server in the project folder, then open http://localhost:8000/ — otherwise JavaScript will not load and Start will do nothing.";
+          }
+        }
+      })();
+    </script>
+    <div id="start-modal" class="modal" role="dialog" aria-labelledby="start-title">
+      <div class="modal-card">
+        <h1 id="start-title">3D Maze</h1>
+        <p class="modal-lead">Enter your name and choose a maze size to begin.</p>
+        <form id="start-form" action="#" method="get">
+          <label class="field">
+            <span>Name</span>
+            <input id="player-name" type="text" maxlength="32" autocomplete="nickname" placeholder="Player" />
+          </label>
+          <label class="field">
+            <span>Maze size</span>
+            <select id="maze-size" aria-label="Maze size">
+              <option value="5">5 × 5</option>
+              <option value="10">10 × 10</option>
+              <option value="15">15 × 15</option>
+              <option value="20" selected>20 × 20</option>
+            </select>
+          </label>
+          <p id="start-hint" class="hint hidden"></p>
+          <button type="submit" id="btn-start" class="btn primary">Start game</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="lb-modal" class="modal hidden" role="dialog" aria-labelledby="lb-title">
+      <div class="modal-card wide">
+        <h2 id="lb-title">Top 10 times</h2>
+        <p class="modal-lead">Best escape times per maze size (lower is better).</p>
+        <div id="lb-content"></div>
+        <button type="button" id="lb-close" class="btn">Close</button>
+      </div>
+    </div>
+
+    <div id="win-modal" class="modal hidden" role="dialog" aria-labelledby="win-title">
+      <div class="modal-card wide">
+        <h2 id="win-title">You reached the exit</h2>
+        <p id="win-your-time" class="win-time"></p>
+        <h3 class="subhead">Top 10 — this maze size</h3>
+        <div id="win-top10-list" class="table-wrap"></div>
+        <button type="button" id="win-close" class="btn primary">OK</button>
+      </div>
+    </div>
+
+    <div id="app" class="hidden">
+      <div id="canvas-container"></div>
+      <div id="game-hud">
+        <div class="hud-row">
+          <span id="hud-name" class="hud-name"></span>
+          <span id="hud-size" class="hud-size"></span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Time</span>
+          <span id="hud-timer" class="hud-timer">0.00s</span>
+        </div>
+        <div class="hud-buttons">
+          <button type="button" id="btn-top10" class="btn small">Top 10</button>
+          <button type="button" id="btn-respawn" class="btn small">Respawn</button>
+          <button type="button" id="btn-rebuild" class="btn small">Rebuild</button>
+        </div>
+      </div>
+      <div id="minimap-wrap" class="visible" aria-hidden="true">
+        <canvas id="minimap" width="200" height="200"></canvas>
+        <div class="minimap-hint">Map (start &amp; after 10s idle; hides on move)</div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
