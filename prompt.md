@@ -1,9 +1,8 @@
-Take the existing codebase as a base and implement a web-based 3D Maze game in first-person view.
-
-Requirements:
+We are creating WEB based First person view 3D maze escape game to be played in browser.
 
 1) Start and menu flow
-- Show a splash screen first with the exact text: "THIS IS TETRIS!"
+- Show a splash screen first with the exact text: "THIS IS TETRIS!". 
+- Remove the splash screen on click or after 5 sec.
 - On click, open the main menu screen.
 - Main menu must include:
   - A drop-down list of maze sizes:
@@ -12,10 +11,12 @@ Requirements:
     - 15 x 15
     - 20 x 20
   - A "Top 10" button that opens the scoreboard.
+  - mandatory field to enter user name before game starts
 
 2) Scoreboard
-- Show records for all 4 maze sizes in a tabbed view.
+- Show top 10 records for all 4 maze sizes in a tabbed view.
 - Each record row must include: USER, TIME, DATE.
+- Use the index.html file to store the results.
 
 3) Maze generation and rules
 - Generate the maze programmatically.
@@ -37,9 +38,8 @@ Requirements:
 - Hide minimap immediately when the player moves.
 
 6) Theme
-- Apply a Star Wars visual theme to the maze and UI.
+- Apply a Chainsaw Man: Shikaku-hen - Человек-бензопила visual theme to the maze and UI.
 
 Implementation notes:
-- Reuse and adapt existing project structure/files where possible.
 - Keep code modular and readable.
-- Do not break current core gameplay features while implementing these requirements.
+- Validate yourself after each step.
